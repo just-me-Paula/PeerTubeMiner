@@ -49,6 +49,7 @@ public class Transformer {
         if (video.getAccount() != null) {
             User acc = video.getAccount();
             vmUser = new VMUser(
+                    String.valueOf(acc.getId()),
                     acc.getDisplayName(),
                     acc.getProfileUrl(),
                     acc.getAvatarPath()
@@ -73,15 +74,19 @@ public class Transformer {
             ));
         }
 
-        // Obtener captions — language es un objeto {id, label} en PeerTube; extraer el label como String
+        // Obtener captions
         List<Caption> captions = captionService.fetchCaptionsByVideo(video.getUuid());
         for (Caption cap : captions) {
             String langLabel = null;
             if (cap.getLanguage() != null) {
                 langLabel = cap.getLanguage().getLabel();
             }
+
+
+            String idSeguro = (cap.getId() != null) ? String.valueOf(cap.getId()) : java.util.UUID.randomUUID().toString();
+
             vmVideo.getCaptions().add(new VMCaption(
-                    String.valueOf(cap.getId()),
+                    idSeguro, //
                     cap.getCaptionPath(),
                     langLabel
             ));

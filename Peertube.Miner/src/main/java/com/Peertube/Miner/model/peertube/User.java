@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User {
 
     @JsonProperty("id")
-    private Long id;
+    private String id;
 
     @JsonProperty("displayName")
     private String displayName;
@@ -18,7 +18,7 @@ public class User {
     @JsonProperty("avatarPath")
     private String avatarPath;
 
-    public Long getId() { return id; }
+    public String getId() { return id; }
     public String getDisplayName() { return displayName; }
     public String getProfileUrl() { return profileUrl; }
     public String getAvatarPath() { return avatarPath; }
